@@ -25,13 +25,14 @@ def generate_weather_data():
 
 
 def send_to_volume(data, filepath):
+    ##json into text to be then accessed by store node.
     with open(filepath, "a") as file:
         file.write(json.dumps(data) + "\n")
 
 
 
 if __name__ == '__main__':
-    data_filepath = "svolume/data.text"
+    data_filepath = "svolume/data.txt"
     while True:
         data = generate_weather_data()
         send_to_volume(data, data_filepath)
