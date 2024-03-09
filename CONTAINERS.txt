@@ -1,0 +1,6 @@
+Docker containers, two diffrent containers one that will simulate the Data-generating node and one that will simulate the storing-and-analysis node.
+They will share a volume between each other (shared_volume). The data node will enter data into the shared volume and store node will take data from that
+shared volume and store it into database and analyze.
+
+
+
