@@ -1,8 +1,8 @@
 import json
 from datetime import datetime
-import datetime
 import random
 import time
+import  os
 
 def generate_weather_data():
     current_time = datetime.now()
@@ -33,6 +33,12 @@ def send_to_volume(data, filepath):
 
 if __name__ == '__main__':
     data_filepath = "svolume/data.txt"
+
+    ##make sure data.txt exists before we append :), basically create empty file
+    if not os.path.exists(data_filepath):
+        with open (data_filepath, "w") as file:
+            pass
+
     while True:
         data = generate_weather_data()
         send_to_volume(data, data_filepath)
