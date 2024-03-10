@@ -32,7 +32,7 @@ def send_to_volume(data, filepath):
 
 
 if __name__ == '__main__':
-    data_filepath = "svolume/data.txt"
+    data_filepath = "/svolume/data.txt"
 
     ##make sure data.txt exists before we append :), basically create empty file
     if not os.path.exists(data_filepath):

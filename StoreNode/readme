@@ -1,0 +1,7 @@
+To set up this, make this the current working directory and do the 
+//to create the docker image
+1.docker build -t store-analysis . 
+//creates the container with a sharedvolume
+2.docker run -d --name store-analysis -v shared_volume:/svolume store-analysis
+
+Similar to making the data-generator, but make sure this is created after the data-generator not before it.
