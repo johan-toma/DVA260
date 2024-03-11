@@ -9,9 +9,11 @@ def generate_weather_data():
     temperature = random.randint(5, 15)
     humidity = random.randint(15, 25)
 
+    #statement used to esnure this "parameters for generating data: temperature random value between -5, 5 degrees if the current time is between 21:00-9:00"
     if current_time.hour >= 21 or current_time.hour <= 9:
         temperature = random.randint(-5, 5)
-    
+        
+    #statement used to ensure this "humidity: generate random values in the range of 10, 20 percent if current month is january to june [15, 25]"
     if current_time.month >= 1 or current_time.month <= 6:
         humidity = random.randint(10, 20)
     
@@ -23,7 +25,7 @@ def generate_weather_data():
         "humidity": humidity
     }
 
-
+#open data.txt file to append with data, data.txt is shared with storenode
 def send_to_volume(data, filepath):
     ##json into text to be then accessed by store node.
     with open(filepath, "a") as file:
@@ -38,7 +40,7 @@ if __name__ == '__main__':
     if not os.path.exists(data_filepath):
         with open (data_filepath, "w") as file:
             pass
-
+    ##loop to continously send data every 5 seconds by default to the data.txt file shared between storenode and datanode.
     while True:
         data = generate_weather_data()
         send_to_volume(data, data_filepath)
