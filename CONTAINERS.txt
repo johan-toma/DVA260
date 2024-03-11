@@ -4,3 +4,4 @@ shared volume and store it into database and analyze.
 
 
 
+to enter a docker container do: docker exec -it <name/id> bash
