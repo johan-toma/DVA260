@@ -12,7 +12,8 @@ db = client.weather_data
 measurements = db.measurements
 
 #ensure unique values are entered meaning no same entry/duplicate entries
-measurements.create_index([("timestamp"), 1], unique=True)
+measurements.create_index([("timestamp", 1)], unique=True)
+
 
 def store_file(data_filepath):
     lines = ""
@@ -21,10 +22,10 @@ def store_file(data_filepath):
         return
     
     with open(data_filepath, 'r') as file:
-        lines = file.readLines()
+        lines = file.readlines()
     
     #clear file, after taking the contents
-    with open(data_filepath, 'w').close():
+    with open(data_filepath, 'w') as file:
         pass
 
     #attempt to put each line as adocument inside mongodb
