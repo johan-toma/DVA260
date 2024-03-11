@@ -1,0 +1,5 @@
+This is a must to be running do a container for it seperately
+
+docker run -d --name mongod -p 27017:27017 --network my-network mongo:latest
+
+to verify and or enter the database do: docker exec -it mongod mongosh

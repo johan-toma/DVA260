@@ -6,7 +6,7 @@ from datetime import datetime
 import json
 
 mongo = os.getenv("MONGO_URI")
-client = MongoClient('localhost', 27017)
+client = MongoClient("mongodb://mongod:27017/")
 
 db = client.weather_data
 measurements = db.measurements
