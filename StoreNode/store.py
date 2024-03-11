@@ -36,7 +36,7 @@ def store_file(data_filepath):
         except Exception as error:
             print(f"Error insering document {error}")
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     data_filepath = "/svolume/data.txt"
     while True:
         store_file(data_filepath)
