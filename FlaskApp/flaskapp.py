@@ -23,7 +23,8 @@ def showtable():
 
 @app.route('/displaygraph')
 def displaygraph():
-    return ""
+    
+    return render_template('displaygraph.html')
 
 
 
