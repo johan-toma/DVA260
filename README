@@ -1,7 +1,7 @@
 The steps to recreate a fully working solution:
 
 Inside the folder preferably where "Datanode" is located, make it the current working directory, creates image of datagenerator.
-**1. docker build -t datagenerator .**
+1. docker build -t datagenerator .
 
 Inside the folder for where store-analysis is lovated, make it the current working directory, creates image of store-analysis node.
 2. docker build -t store-analysis .
