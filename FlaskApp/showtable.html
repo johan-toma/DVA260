@@ -26,17 +26,19 @@
     <table>
         <thead>
             <tr>
-                <th>Date</th>
+                <th>Timestamp</th>
+                <th>Sensor_name</th>
                 <th>Temperature</th>
-                <-->
+                <th>Humidity</th>
             </tr>
         </thead>
         <tbody>
             {% for item in data %}
                 <tr>
-                    <td>{{ item.date }}</td>
+                    <td>{{ item.timestamp }}</td>
+                    <td>{{ item.sensor_name }}</td>
                     <td>{{ item.temperature }}</td>
-                    <!-->
+                    <td>{{ item.humidity }}</td>
                 </tr>
             {% endfor %}
         </tbody>
