@@ -1,5 +1,5 @@
 from flask import Flask
-from pymongo import MongoClient
+from pymongo import MongoClient, WriteConcern
 import os
 import time
 from datetime import datetime
@@ -32,6 +32,7 @@ def store_file(data_filepath):
     for line in lines:
         try: 
             doc = json.loads(line.strip())
+            
             measurements.insert_one(doc)
             print(f"Inserted: {doc}")
         except Exception as error:

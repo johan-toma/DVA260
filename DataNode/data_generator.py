@@ -14,7 +14,7 @@ def generate_weather_data():
         temperature = random.randint(-5, 5)
         
     #statement used to ensure this "humidity: generate random values in the range of 10, 20 percent if current month is january to june [15, 25]"
-    if current_time.month >= 1 or current_time.month <= 6:
+    if current_time.month >= 1 and current_time.month <= 6:
         humidity = random.randint(10, 20)
     
     ##return a tuple with the random generated values
