@@ -1,0 +1,47 @@
+The steps to recreate a fully working solution:
+
+Inside the folder preferably where "Datanode" is located, make it the current working directory, creates image of datagenerator.
+1. docker build -t datagenerator .
+
+Inside the folder for where store-analysis is lovated, make it the current working directory, creates image of store-analysis node.
+2. docker build -t store-analysis .
+
+Create volume for the datagenerator and store-analysis node to share data amongst eachother then sending it, preferably is done in a way where one sends the other reads. Which is done in this case.
+3. docker volume create shared_volume
+
+Create a network for the MongoDB and store-analysis, since store analysis purpose would be to put the generated data inside the database.
+4. docker network create my-network
+
+When these intial steps to prepare for the containers has been done, now its time for running the containers. 
+
+Begin always with the datagenerator so that there is data to send to database (MongoDB), easier to give it anme I gave it datagenerator, the last datagenerator written is the image, its important whilst the first can be whatever.
+5. docker run -d --name datagenerator -v shared_volume:/svolume datagenerator
+
+This step is more so important to launch the database so that data can be stored inside it, if this is not done first, the store-analysis node will fail as there is no database it can store inside, the first port here can be whatever whilst the second must be 27017. Also the name must also be mongod always.
+Things to make sure for this: is name mongod, connect network same as store-analysis, port 27017 and image mongo.
+6. docker run -d -p 27017:27017 --name mongod --network my-network mongo:latest
+
+Now launch the store analysis node this stores data from svolume which is sent there into a data.txt by datagenerator. Which stores it inside MongoDB, name can be whatever for the store-analysis node.
+Things to remember: always makesure that its connected to same volume as datagenerator also named to svolume and same network as the MongoDB
+7. docker run -d --name store-analysis --network my-network -v shared_volume:/svolume store-analysis
+
+When all these steps have been done it should work correctly, if there are issues most often its just the communication failure between store-analysis and
+MongoDB, this can range from not being in same network or different port on mongodb.
+
+To verify if its working a simple "docker ps" can be done and if you see that store-analysis is shutdown exit(1), means an error occured.
+If its running and still issues with flask app, verify if data is being stored by doing these steps.
+
+This will make you enter the mongodb, where you can view database, collections and documents
+1. docker exec -it mongod mongosh
+
+inside mongosh write a command, it should show weather_data, if it doesnt means something went wrong with creating the database from store-analysis.
+2. show dbs
+
+If it is displaying weather_data.
+3. use weather_data
+
+to list all collections (tables) in the current database, the collection shown should only be "measurements"
+4. show collections 
+
+to view documents in a specific collection use "find", to view all documents in measurements collection. This verifies that data is being stored inside database.
+5. db.measurements.find() or db.measurements.find().pretty
