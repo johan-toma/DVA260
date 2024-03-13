@@ -17,7 +17,8 @@ def index():
 
 @app.route('/showtable')
 def showtable():
-    return ""
+    data=list(collection.find({}))
+    return render_template('show_data.html',data=data)
 
 
 @app.route('/displaygraph')
@@ -28,7 +29,9 @@ def displaygraph():
 
 @app.route('/maxtemp')
 def maxtemp():
-    return ""
+    pipeline=[{"$group":{
+        "_id":"$
+    }]
 
 
 @app.route('/avgtemp')
