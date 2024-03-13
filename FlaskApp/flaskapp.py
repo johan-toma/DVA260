@@ -17,23 +17,39 @@ def index():
 
 @app.route('/showtable')
 def showtable():
-    return ""
+    data=list(collection.find({}))
+    return render_template('showtable.html',data=data)
 
 
 @app.route('/displaygraph')
 def displaygraph():
-    return ""
+    
+    return render_template('displaygraph.html')
 
 
 
 @app.route('/maxtemp')
 def maxtemp():
-    return ""
+    pipeline=[
+        {"$group":{
+           "_id":"$temperature",
+           "max_temperature":{"$max":"$temperature"}
+    }}
+    ]
+    data=list(collection.aggregate(pipeline))
+    return render_template('maxtemp.html',data=data)
 
 
 @app.route('/avgtemp')
 def avgtemp():
-    return ""
+    pipeline= [{"$group":{
+        "_id":None,
+        "average":{"$avg":"$temperature"}
+    }
+    }
+]
+ average=list(collection.aggregate(pipeline))[0]["average"]
+return render_template('avgtemp.html', average=average)
 
 
 
