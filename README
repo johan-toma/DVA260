@@ -46,9 +46,6 @@ to list all collections (tables) in the current database, the collection shown s
 to view documents in a specific collection use "find", to view all documents in measurements collection. This verifies that data is being stored inside database.
 5. db.measurements.find() or db.measurements.find().pretty
 
-
-
-
 Once you have verified it works, you can start the flask app by doing this inside the directory 
 1. python3 flaskapp.py or absolutepath-equivalent /bin/python3 /home/username/whereitsplaced/GitHub (where you have it cloned or might not even need this)/FlaskApp/flaskapp.py
 2. enter on a browser: https://127.0.0.1:8000/
