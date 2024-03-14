@@ -18,9 +18,7 @@ measurements = db.measurements
 ##Shows everythign stored inside the measurement collection in weather_data db. (this is justa test)
 @app.route('/')
 def index():
-    documents = list(measurements.find({}))
-    jsonify_documents = json.loads(json_util.dumps(documents))
-    return jsonify(jsonify_documents)
+    return render_template('index.html')
 
 
 @app.route('/showtable')
@@ -84,7 +82,7 @@ def maxtemp():
     #only interested in the max value and not its occcurences, just the maximum value that can be seen uin databas
     #sort by temperature in descending order and get the first result
     max_temp = measurements.find().sort("temperature", -1).limit(1).next()
-    max_temp = maxtemp.get('temperature')
+    max_temp = max_temp.get('temperature')
     return f"<h1>Max temp in database : {max_temp}Celsius</h1>"
 
 
