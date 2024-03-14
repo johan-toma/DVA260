@@ -1,0 +1,3 @@
+Openssl self signed certificate used for the flask app, run this code at the location of where the flask ap iss in terminal
+1. openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -subj "/C=SE/ST=./L=Eskilstuna/O=DVA260/OU=/CN=" -days 365
+

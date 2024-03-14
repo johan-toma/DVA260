@@ -1,5 +1,6 @@
 import datetime
 import io
+import os
 from flask import Flask, Response, jsonify, render_template
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
@@ -8,6 +9,7 @@ import json
 from bson import json_util
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from OpenSSL import SSL 
 
 app = Flask(__name__)
 client = MongoClient("mongodb://localhost:27017/")
@@ -114,4 +116,8 @@ def countentries():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=8080)
+    #it didnt work had to verify with the absolute path
+    #if not os.path.exists("/home/johan/Documents/GitHub/DVA260/FlaskApp/cert.pem"):
+        #print("SSL CERTIFICATE MISSING")
+        #sys.exit(1)
+    app.run(debug=True, host='127.0.0.1', port=8000, ssl_context=('/home/johan/Documents/GitHub/DVA260/FlaskApp/cert.pem', '/home/johan/Documents/GitHub/DVA260/FlaskApp/key.pem'))
