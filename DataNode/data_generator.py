@@ -4,7 +4,9 @@ import random
 import time
 import  os
 
+#create random weather data 
 def generate_weather_data():
+    #generate random temperature between 5-15 and humidity 15-25, adn take currenttime
     current_time = datetime.now()
     temperature = random.randint(5, 15)
     humidity = random.randint(15, 25)
@@ -17,7 +19,7 @@ def generate_weather_data():
     if current_time.month >= 1 and current_time.month <= 6:
         humidity = random.randint(10, 20)
     
-    ##return a tuple with the random generated values
+    ##return a dictionary/tuple with the random generated values and format timestamp
     return {
         "timestamp": current_time.strftime("%Y-%m-%dTIME:%H:%M:%S"),
         "sensorname": "Outdoorsensor",
@@ -27,7 +29,7 @@ def generate_weather_data():
 
 #open data.txt file to append with data, data.txt is shared with storenode
 def send_to_volume(data, filepath):
-    ##json into text to be then accessed by store node.
+    ##json into text to be then accessed by store node, appends a \n also
     with open(filepath, "a") as file:
         file.write(json.dumps(data) + "\n")
 
@@ -36,7 +38,7 @@ def send_to_volume(data, filepath):
 if __name__ == '__main__':
     data_filepath = "/svolume/data.txt"
 
-    ##make sure data.txt exists before we append :), basically create empty file
+    ##make sure data.txt exists before we append, basically create empty file
     if not os.path.exists(data_filepath):
         with open (data_filepath, "w") as file:
             pass
